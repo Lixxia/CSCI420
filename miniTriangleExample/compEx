@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#Compiles and executes
+
+jflex miniTriangle.jflex
+
+javac TriangleLexer.java
+
+java TriangleLexerTest sample.tri
+
