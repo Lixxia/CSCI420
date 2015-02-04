@@ -1,18 +1,11 @@
 /*
-Defines a lexical analyzer for a subset of the language Triangle.  Triangle is a language described in the text
-Programming Language Processors in Java by David Watt and Deryck Brown.
 
 Make whitespace blocks one whitespace.
 
-Part I: 
-Add to the file miniTriangle.jflex and get it working on your machine.  
-Make simple changes like adding the language for an identifier, +, - and whitespace (where multiple whitespaces are treated as one block.)  
+Create a JFlex input file that will recognize tokens in the Traingle language and will print to the console the tokens seen. 
 
-Part II:
-Create a JFlex input file that will recognize tokens in the Traingle language and will print to the console the tokens seen.  
 An error should be displayed if it can not recognize a token.
 
-Submit triangle.jflex
 */
 
 import java_cup.runtime.*;
@@ -57,4 +50,4 @@ while { System.out.println("while");}
 {identifier} {System.out.println("Identifier");}
 {integerLiteral} {System.out.println("Integer Literal");}
 {comment} {System.out.println("Comment");}
-. { System.out.println("Unknown character");}
+. { System.out.println("Unrecognized token.");}
