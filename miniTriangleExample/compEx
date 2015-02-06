@@ -2,7 +2,7 @@
 #Compiles and executes
 export CLASSPATH=$CLASSPATH:/home/lixxia/repos/csci420/cup/java-cup-11b.jar:/home/lixxia/repos/csci420/cup/java-cup-11b-runtime.jar:.
 
-jflex miniTriangle.jflex
+jflex triangle.jflex
 
 javac TriangleLexer.java
 
