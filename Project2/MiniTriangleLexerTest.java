@@ -9,19 +9,19 @@
  * The following command-line invocation will read in the test program in the
  * file "lexer-test.p" and print out each token found in that file:
  *
- *     java TriangleLexerTest lexer-test.p
+ *     java TriangleLexerCompleteTest lexer-test.p
  *
  */
 
 import java.io.*;
 import java_cup.runtime.*;
 
-public class TriangleLexerTest {
+public class MiniTriangleLexerTest {
 
     public static void main(String[] args) {
         Symbol sym;
         try {
-            TriangleLexer lexer = new TriangleLexer(new FileReader(args[0]));
+            MiniTriangleLexer lexer = new MiniTriangleLexer(new FileReader(args[0]));
             for (sym = lexer.next_token(); sym.sym != 0;
                     sym = lexer.next_token()) {
 

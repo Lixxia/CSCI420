@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#To create a Parser; execute java_cup.Main -parser <name of the created parser> -symbols <name of your symbol table> < *.cup 
+#           (where *.cup is the name of the file) holding the CFG specifications for your language
+#This generates two files <parser>.java and <symbol table>.java  
+#    (Note: symbol names used in *.cup should match those used in *.jflex)
+# export CLASSPATH=$CLASSPATH:/home/lixxia/repos/csci420/cup/java-cup-11b.jar:/home/lixxia/repos/csci420/cup/java-cup-11b-runtime.jar:.
+java -cp "/home/lixxia/repos/csci420/cup/java-cup-11b.jar:/home/lixxia/repos/csci420/cup/java-cup-11b-runtime.jar:." java_cup.Main -parser CalcParser -symbols mySym < miniTriangleParser.cup
+# java -cp $CLASSPATH java_cup.Main -parser CalcParser -symbols mySym < parser.cup
+# java java_cup.Main -parser CalcParser -symbols mySym <parser.cup
+
+#To create Lexer: jflex your .jflex file which will create a *Lexer.java file
+#   This creates a *Lexer.java file
+jflex miniTriangle.jflex 
+
+# #Compile the <parser>.java <symbol table>.java and *ParserTest.java file
+javac -cp "/home/lixxia/repos/csci420/cup/java-cup-11b.jar:/home/lixxia/repos/csci420/cup/java-cup-11b-runtime.jar:." CalcParser.java mySym.java MiniTriangleParserTest.java
+# java -cp $CLASSPATH CalcParser.java mySym.java CalcParserTest.java
+
+# #Execute *ParserTest to determine if valid parser
+java -cp "/home/lixxia/repos/csci420/cup/java-cup-11b.jar:/home/lixxia/repos/csci420/cup/java-cup-11b-runtime.jar:." MiniTriangleParserTest basic.tri
+# java -cp $CLASSPATH CalcParserTest basic.tri

@@ -1,0 +1,89 @@
+// CUP specification for a simple expression evaluator (no actions)
+
+import java_cup.runtime.*;
+
+/* Terminals (tokens returned by the scanner). This list should match the list of tokens provided in your lexer.*/
+terminal String     BEGIN, END, IDENTIFIER, VAR, CONST;
+terminal String     IF, THEN, ELSE, WHILE, DO, LET, IN;
+terminal String     SEMI, ASSIGN, PLUS, MINUS, COMMA, COLON; 
+terminal String     TIMES, DIVIDE, EXPONENT;
+terminal String     LTHEN, LEQUAL, EEQUAL, NEQUAL, GEQUAL, GTHEN, EQUALS;
+terminal String     AND, OR, NOT;
+terminal String     LPAREN, RPAREN;
+terminal Integer    INTEGER;
+
+/* Non terminals */
+non terminal Program program;
+non terminal Commands commands;
+non terminal Command command;
+non terminal Exprs exprs;
+non terminal Expr expr;
+non terminal PrimExpr primExpr;
+non terminal VarExpr varExpr;
+non terminal BinOp binOp;
+non terminal UnaryOp unaryOp;
+non terminal Decls decls;
+non terminal Decl decl;
+non terminal TypeDen typeDen;
+
+/* Precedences */
+precedence right EXPONENT;
+precedence left TIMES, DIVIDE;
+precedence left PLUS, MINUS;
+precedence nonassoc LTHEN, LEQUAL, EEQUAL, NEQUAL, GEQUAL, GTHEN;
+precedence left AND;
+precedence left OR;
+
+
+/* The grammar */
+program    ::= command:c {: RESULT = new Program(c); :};
+
+command    ::= BEGIN commands:c END {: RESULT = new Command(c); :}
+            |  LET decls:ds IN command:c {: RESULT = new Command(ds,c); :}
+            |  WHILE expr:e DO command:c {: RESULT = new Command(e,c); :}
+            |  ELSE command:c {: RESULT = new Command(c); :}
+            |  IF expr:e THEN command:c {: RESULT = new Command(e,c); :}
+            |  varExpr:v LPAREN expr:e RPAREN {: RESULT = new Command(v,e); :}
+            |  varExpr:v ASSIGN expr:e {: RESULT = new Command(v, e); :};
+
+commands   ::= command:c SEMI commands:cs {: RESULT = new Commands(c, cs); :}
+            |  command:c {: RESULT = new Commands(c); :};
+
+expr       ::= expr:e1 binOp:op expr:e2 {: RESULT = new Expr(e1, e2, op); :}
+            |  INTEGER:e {: RESULT = new Expr(e); :};
+
+exprs      ::= expr:e COMMA exprs:es {: RESULT = new Exprs(e, es); :}
+            |  expr:e {: RESULT = new Exprs(e); :};
+
+primExpr   ::= LPAREN expr:e RPAREN {: RESULT = new PrimExpr(e); :} 
+            | unaryOp:u primExpr:p {: RESULT = new PrimExpr(u,p); :}
+            | varExpr:v {: RESULT = new PrimExpr(v); :}
+            | INTEGER:i {: RESULT = new PrimExpr(i); :};
+
+varExpr    ::= IDENTIFIER:id {: RESULT = new VarExpr(id); :};
+
+binOp      ::= OR {: RESULT = new BinOp("||"); :}
+            |  AND {: RESULT = new BinOp("&&"); :}
+            |  GTHEN {: RESULT = new BinOp(">"); :}
+            |  GEQUAL {: RESULT = new BinOp(">="); :}
+            |  NEQUAL {: RESULT = new BinOp("!="); :}
+            |  EEQUAL {: RESULT = new BinOp("=="); :}
+            |  LEQUAL {: RESULT = new BinOp("<="); :}
+            |  LTHEN {: RESULT = new BinOp("<"); :}
+            |  MINUS {: RESULT = new BinOp("-"); :}
+            |  PLUS {: RESULT = new BinOp("+"); :}
+            |  DIVIDE {: RESULT = new BinOp("/"); :}
+            |  TIMES {: RESULT = new BinOp("*"); :}
+            |  EXPONENT {: RESULT = new BinOp("^"); :};
+
+unaryOp    ::= NOT {: RESULT = new UnaryOp("!"); :}
+            |  MINUS {: RESULT = new UnaryOp("-"); :};
+
+decl       ::= VAR IDENTIFIER:i COLON typeDen:t ASSIGN expr:e {: RESULT = new Decl(i,t,e); :}
+            |  VAR IDENTIFIER:i COLON typeDen:t {: RESULT = new Decl(i,t); :}
+            |  CONST IDENTIFIER:i COLON typeDen:t EQUALS expr:e {: RESULT = new Decl(i,t,e); :};
+
+decls      ::= decl:d SEMI decls:ds {: RESULT = new Decls(d, ds); :}
+            |  decl:d {: RESULT = new Decls(d); :};
+
+typeDen    ::= IDENTIFIER:id {: RESULT = new TypeDen(id); :};
