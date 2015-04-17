@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -n "File to Test: "
+read name
+
+java Triangle.Compiler tests/$name
+
+java TAM.Interpreter
+
+java TAM.Disassembler
