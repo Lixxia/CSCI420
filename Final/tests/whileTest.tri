@@ -1,0 +1,12 @@
+!While test
+let
+  var i: Integer
+in
+  begin
+  while i < 10 do
+   begin
+     putint(i);
+	 i := i + 1
+   end
+  end 
+  
