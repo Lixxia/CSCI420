@@ -1,4 +1,5 @@
 #!/bin/bash
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/CodeGenerator/Encoder.java
 
 echo -n "File to Test: "
 read name
@@ -8,3 +9,4 @@ java Triangle.Compiler tests/$name
 java TAM.Interpreter
 
 java TAM.Disassembler
+

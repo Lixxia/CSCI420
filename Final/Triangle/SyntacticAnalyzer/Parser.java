@@ -81,6 +81,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntil;
 
 public class Parser {
 
@@ -334,6 +335,17 @@ public class Parser {
       }
       break;
 
+    case Token.REPEAT:
+      {
+        acceptIt();
+        Command cAST = parseSingleCommand();
+        accept(Token.UNTIL);
+        Expression eAST = parseExpression();
+        finish(commandPos);
+        commandAST = new RepeatUntil(eAST, cAST, commandPos);
+      }
+      break;
+      
     case Token.SEMICOLON:
     case Token.END:
     case Token.ELSE:
