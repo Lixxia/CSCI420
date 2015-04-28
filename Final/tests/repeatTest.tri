@@ -1,0 +1,12 @@
+!RepeatUntil test
+let
+  var i: Integer
+in
+  begin
+  repeat
+      begin
+          putint(i);
+          i := i + 1
+      end
+  until i=10
+  end 
