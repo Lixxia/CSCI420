@@ -1,5 +1,10 @@
 #!/bin/bash
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/AbstractSyntaxTrees/Visitor.java
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/SyntacticAnalyzer/Token.java
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/SyntacticAnalyzer/Parser.java
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/TreeDrawer/LayoutVisitor.java
 javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/CodeGenerator/Encoder.java
+javac -cp "/home/lixxia/repos/csci420/Final:/home/lixxia/repos/csci420/Final/Triangle:." Triangle/ContextualAnalyzer/Checker.java
 
 echo -n "File to Test: "
 read name

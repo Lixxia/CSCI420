@@ -81,6 +81,7 @@ import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntil;
+// import Triangle.AbstractSyntaxTrees.ForCommand;
 
 public class LayoutVisitor implements Visitor {
 
@@ -125,6 +126,10 @@ public class LayoutVisitor implements Visitor {
   public Object visitRepeatUntil(RepeatUntil ast, Object obj) {
     return layoutBinary("RepeatUntil.", ast.E, ast.C);
   }
+
+  // public Object visitForCommand(ForCommand ast, Object obj) {
+  //   return layoutQuaternary("ForCom.", ast.I, ast.E1, ast.E2, ast.C);
+  // }
 
 
   // Expressions

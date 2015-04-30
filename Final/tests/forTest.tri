@@ -1,0 +1,9 @@
+!ForCommand test
+let
+  var i: Integer
+in
+  begin
+  for i from 2 to 5 do
+    if prime(i) then
+    putint(i)
+  end 

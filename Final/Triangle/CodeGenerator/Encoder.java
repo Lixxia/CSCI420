@@ -90,6 +90,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntil;
+import Triangle.AbstractSyntaxTrees.ForCommand;
 
 public final class Encoder implements Visitor {
 
@@ -173,7 +174,6 @@ public final class Encoder implements Visitor {
 
     return null;
   }
-
 
   // Expressions
   public Object visitArrayExpression(ArrayExpression ast, Object o) {
